@@ -3,6 +3,6 @@ Herramienta para identificar las palabras más utilizadas en los nombres de mét
 
 # Como Ejecutar
 
-Se debe ejecutar el siguiente comando en la raiz del proyecto "docker-compose up --build". Hay que tener en cuenta que se necesita un archivo .env con un token de github personal.
+Se debe ejecutar el siguiente comando en la raiz del proyecto "docker-compose up --build". Hay que tener en cuenta que se necesita crear un archivo .env con un token de github, hay un archivo de ejemplo de como deberia verse el .env
 
 El visualizador corre en http://localhost:8080
