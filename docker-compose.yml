@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  redis_broker:
+    image: redis:alpine
+    container_name: redis_broker
+    ports:
+      - "6379:6379"
+    restart: always
+
+  miner:
+    build: 
+      context: ./miner
+    container_name: github_miner
+    depends_on:
+      - redis_broker
+    environment:
+      - REDIS_HOST=redis_broker
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    restart: on-failure
+
+  api:
+    build: 
+      context: ./api
+    container_name: visualizer_api
+    depends_on:
+      - redis_broker
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis_broker
+    restart: always
+
+  frontend:
+    build: 
+      context: ./frontend
+    container_name: visualizer_frontend
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+    restart: always
